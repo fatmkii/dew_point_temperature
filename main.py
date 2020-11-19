@@ -37,7 +37,7 @@ def df(x):
 
 def newtonMethod(x_n, y_0, time=0):
     """
-    牛顿迭代过程
+    牛顿迭代法
     :param x_n: float类型，本次迭代的x
     :param y_0: float类型，使f(x_n)值尽可能逼近y_0
     :param time: int类型，迭代次数显示
@@ -73,7 +73,9 @@ if __name__ == '__main__':
     saturated_vapor_pressure = f(dry_bulb + 273.15)  # 饱和蒸汽压/hPa
     recent_vapor_pressure = saturated_vapor_pressure * relative_humidity / 100  # 当前蒸汽压/hPa
     absolute_humidity = 0.622 * relative_humidity / (1013.25 - relative_humidity)  # 绝对湿度  kg/kg绝干气。1013.25hPa是标准大气压
-    dew_point_temperature = newtonMethod(dry_bulb + 273.15, recent_vapor_pressure) - 273.15  # 露点温度/℃，以牛顿迭代式求解
+
+    # 露点温度/℃，以牛顿迭代式求解（以干球温度为初始逼近值）
+    dew_point_temperature = newtonMethod(dry_bulb + 273.15, recent_vapor_pressure) - 273.15
 
     print('绝对湿度：\t%s\t%s' % (round(absolute_humidity, 4), 'kg/kg绝干气'))
     print('露点温度：\t%s\t%s' % (round(dew_point_temperature, 1), '℃'))
